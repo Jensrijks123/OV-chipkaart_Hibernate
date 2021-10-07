@@ -1,10 +1,8 @@
 package P6.Domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name ="ov_chipkaart")
@@ -17,10 +15,16 @@ public class OVChipkaart {
     private int klasse;
 
     private double saldo;
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "reiziger_id")
     private Reiziger reiziger;
-    @Transient
-    private List<Product> producten;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "ov_chipkaart_product",
+            joinColumns = { @JoinColumn(name = "kaart_nummer") },
+            inverseJoinColumns = { @JoinColumn(name = "product_nummer") }
+    )
+    private List<Product> producten = new ArrayList<>();
 
     public OVChipkaart(int kaartnummer, Date geldingTot, int klasse, double saldo, Reiziger reiziger, List<Product> producten) {
         this.kaartnummer = kaartnummer;
@@ -98,6 +102,8 @@ public class OVChipkaart {
                 ", geldingTot=" + geldig_Tot +
                 ", klasse=" + klasse +
                 ", saldo=" + saldo +
+                ", rezigerNaam=" + reiziger.getNaam() +
+//                ", prodcuten=" + producten.toString() +
                 '}';
     }
 }

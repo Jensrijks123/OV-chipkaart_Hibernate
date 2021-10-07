@@ -1,6 +1,7 @@
 package P6.Domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Reiziger {
     @OneToOne(mappedBy = "reiziger")
     @PrimaryKeyJoinColumn
     private Adres adres;
-    @Transient
+    @OneToMany
     private List<OVChipkaart> ovChipkaarten;
 
     public Reiziger(int id, String voorletters, String tussenvoegsel, String achternaam, java.sql.Date geboortedatum, Adres adres, List<OVChipkaart> ovChipkaarten) {
@@ -107,18 +108,13 @@ public class Reiziger {
     @Override
     public String toString() {
 
-        String ovString = "";
         String adresWoonplaats = "";
-
         if (adres != null) {
             adresWoonplaats = adresWoonplaats + adres.getWoonplaats();
         } else {
             adresWoonplaats = adresWoonplaats + "";
         }
 
-//        for (OVChipkaart ov : ovChipkaarten) {
-//            ovString = ovString + ov + ", ";
-//        }
         return "Reiziger{" +
                 "id=" + id +
                 ", voorletters='" + voorletters + '\'' +
@@ -126,7 +122,6 @@ public class Reiziger {
                 ", achternaam='" + achternaam + '\'' +
                 ", geboortedatum=" + geboortedatum + '\'' +
                 ", adres=" + adresWoonplaats + '\'' +
-//                ", ovchipkaarten=" + ovString +
                 '}';
     }
 }
