@@ -1,14 +1,13 @@
-package P6.Domain;
+package P7.Domein;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Reiziger {
 
     @Id
-    @Column(name = "reiziger_id", unique = true)
+    @Column(name = "reiziger_id")
     private int id;
     private String voorletters;
     private String tussenvoegsel;

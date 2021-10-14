@@ -15,11 +15,15 @@
 <!--        <property name="show_sql">true</property>-->
 <!--        <property name="format_sql">true</property>-->
 
-        <mapping class="P6.Domain.Reiziger"/>
-        <mapping class="P6.Domain.OVChipkaart"/>
-        <mapping class="P6.Domain.Product"/>
-        <mapping class="P6.Domain.Adres"/>
-<!--        <mapping class="P6.Domain.OVChipkaartProduct"/>-->
+<!--        <mapping class="P6.Domain.Reiziger"/>-->
+<!--        <mapping class="P6.Domain.OVChipkaart"/>-->
+<!--        <mapping class="P6.Domain.Product"/>-->
+<!--        <mapping class="P6.Domain.Adres"/>-->
+
+        <mapping class="P7.Domein.Reiziger"/>
+        <mapping class="P7.Domein.OVChipkaart"/>
+        <mapping class="P7.Domein.Product"/>
+        <mapping class="P7.Domein.Adres"/>
 
     </session-factory>
 </hibernate-configuration> 

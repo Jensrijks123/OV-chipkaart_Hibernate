@@ -1,4 +1,4 @@
-package P6.Domain;
+package P7.Domein;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,7 +9,8 @@ import java.util.List;
 public class OVChipkaart {
 
     @Id
-    @Column(name = "kaart_nummer" , unique = true)
+    @GeneratedValue
+    @Column(name = "kaart_nummer")
     private int kaartnummer;
     private Date geldig_Tot;
     private int klasse;

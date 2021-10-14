@@ -1,6 +1,4 @@
-package P6.Domain;
-
-import org.w3c.dom.ls.LSException;
+package P7.Domein;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +8,8 @@ import java.util.List;
 public class Product {
 
     @Id
-    @Column(name = "product_nummer", unique = true)
+    @GeneratedValue
+    @Column(name = "product_nummer")
     private int id;
     private String naam;
     private String beschrijving;

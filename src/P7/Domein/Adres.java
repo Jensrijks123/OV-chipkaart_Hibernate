@@ -1,4 +1,4 @@
-package P6.Domain;
+package P7.Domein;
 
 import javax.persistence.*;
 
@@ -6,13 +6,14 @@ import javax.persistence.*;
 public class Adres {
 
     @Id
-    @Column(name = "adres_id", unique = true)
+    @GeneratedValue
+    @Column(name = "adres_id")
     private int id;
     private String postcode;
     private String huisnummer;
     private String straat;
     private String woonplaats;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "reiziger_id")
     private Reiziger reiziger;
 

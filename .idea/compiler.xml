@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="OV-chipkaart_Hibernate" target="1.8" />
+      <module name="OV-chipkaart_Hibernate" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
