@@ -30,91 +30,67 @@ public class Main {
         }
     }
 
-    /**
-     * Retouneer een Hibernate session.
-     *
-     * @return Hibernate session
-     * @throws HibernateException
-     */
     private static Session getSession() throws HibernateException {
         return factory.openSession();
     }
 
     public static void main(String[] args) throws SQLException {
-//        testFetchAll();
         testDAOHibernate();
     }
 
-    /**
-     * P6. Haal alle (geannoteerde) entiteiten uit de database.
-     */
-    private static void testFetchAll() {
-        Session session = getSession();
-        try {
-            Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                Query query = session.createQuery("from " + entityType.getName());
-
-                System.out.println("[Test] Alle objecten van type " + entityType.getName() + " uit database:");
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-                System.out.println();
-            }
-        } finally {
-            session.close();
-        }
-    }
 
     private static ReizigerDAO rdao = new ReizigerDAOHibernate(getSession());
+    private static ProductDAO pdao = new ProdcutDAOHibernate(getSession());
+    private static OVChipkaartDAO odao = new OVChipkaartDAOHibernate(getSession());
+    private static AdresDAO adao = new AdresDAOHibernate(getSession());
 
     private static void testDAOHibernate() throws SQLException {
         Session session = getSession();
 
         try {
 
-
             // Reiziger
             // Test Save Reiziger
             try {
-                String gbdatumReiziger = "1995-12-03";
-                Reiziger reiziger = new Reiziger();
-                reiziger.setId(70);
-                reiziger.setVoorletters("F");
-                reiziger.setTussenvoegsel("van");
-                reiziger.setAchternaam("Luc");
-                reiziger.setGeboortedatum(java.sql.Date.valueOf(gbdatumReiziger));
-                reiziger.setAdres(null);
-                reiziger.setOvChipkaarten(null);
-                rdao.save(reiziger);
+                String gbdatumReiziger = "2015-12-03";
+                Reiziger reiziger = new Reiziger(191, "P", "", "GeertBroek", java.sql.Date.valueOf(gbdatumReiziger), null, null);
+//                rdao.save(reiziger);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test update Reiziger
             try {
+                String gbdatumReizigerUpdate = "1994-12-03";
+                Reiziger reizigerUpdate = new Reiziger(68, "Stijn", "van", "Nieuwpoort", java.sql.Date.valueOf(gbdatumReizigerUpdate), null, null);
+//                rdao.update(reizigerUpdate);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test delete Reiziger
             try {
+                String gbdatumReiziger = "2015-12-03";
+                Reiziger reizigerDelete = new Reiziger(191, "P", "", "GeertBroek", java.sql.Date.valueOf(gbdatumReiziger), null, null);
+//                rdao.delete(reizigerDelete);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test findById
             try {
-
+                int reizigerId = 191;
+//                System.out.println(rdao.findById(reizigerId));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test findByGbdatum
             try {
-
+                String gbdatumReiziger1 = "2015-12-03";
+//                System.out.println(rdao.findByGbdatum(java.sql.Date.valueOf(gbdatumReiziger1)));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test findAll()
             try {
-
+//                System.out.println(rdao.findAll());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -123,29 +99,36 @@ public class Main {
             // Adres
             // Test Save Adres
             try {
-
+                Adres adres = new Adres(66, "3450CJ", "11", "Beneben", "Ijsselstein", null);
+//                adao.save(adres);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test update Adres
             try {
+                Adres adres = new Adres(66, "3450CJ", "11", "aaaaa", "Ijsselstein", null);
+//                adao.update(adres);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test delete Adres
             try {
+                Adres adres = new Adres(66, "3450CJ", "11", "Beneben", "Ijsselstein", null);
+//                adao.delete(adres);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test findByReiziger
             try {
-
+                String gbdatumReiziger = "2015-12-03";
+                Reiziger reiziger = new Reiziger(191, "P", "", "GeertBroek", java.sql.Date.valueOf(gbdatumReiziger), null, null);
+//                System.out.println(adao.findByReiziger(reiziger));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test findAll()
             try {
-
+//                System.out.println(adao.findAll());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -154,28 +137,39 @@ public class Main {
             // OVChipkaart
             // Test findByReiziger
             try {
+                String gbdatumReiziger = "2015-12-03";
+                Reiziger reiziger = new Reiziger(191, "P", "", "GeertBroek", java.sql.Date.valueOf(gbdatumReiziger), null, null);
+//                System.out.println(odao.findByReiziger(reiziger));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test save OVChipkaart
             try {
+                String gbdatumReiziger = "2022-12-03";
+                OVChipkaart ovChipkaart = new OVChipkaart(57, java.sql.Date.valueOf(gbdatumReiziger), 1, 3.0, null, null);
+//                odao.save(ovChipkaart);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test update OVChipkaart
             try {
+                String gbdatumReiziger = "2022-12-03";
+                OVChipkaart ovChipkaart = new OVChipkaart(57, java.sql.Date.valueOf(gbdatumReiziger), 1, 8.0, null, null);
+//                odao.update(ovChipkaart);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test delete OVChipkaart
             try {
-
+                String gbdatumReiziger = "2022-12-03";
+                OVChipkaart ovChipkaart = new OVChipkaart(57, java.sql.Date.valueOf(gbdatumReiziger), 1, 3.0, null, null);
+//                odao.delete(ovChipkaart);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test findAll()
             try {
-
+//                System.out.println(odao.findAll());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -184,17 +178,22 @@ public class Main {
             // Product
             // Test save Product
             try {
+                Product product = new Product(7, "BOB", "djfkgkldfg", 30.0, null);
+//                pdao.save(product);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test update Product
             try {
+                Product product = new Product(7, "BOB", "aaaaaa", 30.0, null);
+//                pdao.update(product);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             // Test delete Product
             try {
-
+                Product product = new Product(7, "BOB", "djfkgkldfg", 30.0, null);
+//                pdao.delete(product);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
